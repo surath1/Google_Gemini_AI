@@ -51,5 +51,39 @@ response = model.generate_content("Write a poem about elephant maximum 100 words
 for chunk in response:
   print(chunk.text)
   print("_"*80)
-  
+
+
+```
+
+### streamlit gemini pro q&a app 
+```bash
+model = genai.GenerativeModel('gemini-pro')
+def get_response_gemini_pro(question):
+    response = model.generate_content(question)
+    return response.text
+
+
+st.set_page_config(page_title='Gemini AI Q&A')
+st.header("Google Gemini AI ")
+input = st.text_input("Input:", key='input')
+submit = st.button("Question?")
+
+if submit:
+    response = get_response_gemini_pro(input)
+    st.write(response)
+
+
+# streamlit run main.py
+```
+
+### streamlit gemini pro vision app 
+```bash
+model = genai.GenerativeModel('gemini-pro-vision')
+def get_response_gemini_pro_vision(input, image):
+    if input is not empty:
+        response = model.generate_content([input, image])   
+    else:
+        response = model.generate_content(image)
+    return response.text
+
 ```

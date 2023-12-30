@@ -22,3 +22,21 @@ model = genai.GenerativeModel('gemini-pro')
 response = model.generate_content("What is the GDP of USA?")
 
 print(response.text)
+#print(response.prompt_feedback)
+#print(response.candidates)
+
+def get_response_gemini_pro(question):
+    response = model.generate_content(question)
+    return response.text
+
+
+st.set_page_config(page_title='Gemini AI Q&A')
+st.header("Google Gemini AI ")
+input = st.text_input("Input:", key='input')
+submit = st.button("Question?")
+
+if submit:
+    response = get_response_gemini_pro(input)
+    st.write(response)
+
+

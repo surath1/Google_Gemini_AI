@@ -41,4 +41,15 @@ model = genai.GenerativeModel('gemini-pro')
 response = model.generate_content("What is the GDP of USA?")
 print(response.text)
 # As of 2023, the GDP of the United States is estimated to be around $25.3 trillion, making it the largest economy in the world.
+print(response.prompt_feedback)
+```
+
+### generate text chunk
+```bash
+%time
+response = model.generate_content("Write a poem about elephant maximum 100 words?", stream=True)
+for chunk in response:
+  print(chunk.text)
+  print("_"*80)
+  
 ```

@@ -73,17 +73,39 @@ if submit:
     st.write(response)
 
 
-# streamlit run main.py
+# streamlit run main_vision.py
 ```
 
 ### streamlit gemini pro vision app 
 ```bash
 model = genai.GenerativeModel('gemini-pro-vision')
-def get_response_gemini_pro_vision(input, image):
-    if input is not empty:
-        response = model.generate_content([input, image])   
-    else:
-        response = model.generate_content(image)
-    return response.text
+
+def get_response_gemini_pro_vision(input,image):   
+   if input!="":
+      response = model.generate_content([input,image])
+   else:
+      response = model.generate_content(image)
+      
+   return response.text
+
+
+st.set_page_config(page_title='Gemini AI Image Detector')
+st.header("Google Gemini AI App")
+input = st.text_input("Input:", key='input')
+
+file_uploaded  = st.file_uploader("image ...", type=["jpg", "jpeg", "png"])
+image = ""
+
+if file_uploaded is not None:    
+    image = Image.open(file_uploaded)
+    st.image(image=image, caption="Upload image.", use_column_width=True)
+
+
+submit = st.button("Tell me about the uploaded image?")
+if submit:
+    response = get_response_gemini_pro_vision(input, image)
+    st.subheader("The details about the image is...")
+    st.write(response)
+
 
 ```
